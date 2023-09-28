@@ -3,17 +3,21 @@ import csv
 
 # Connect to the ES instanc
 def connect_instance(host, port, username, password, timeout=120):
-    es = Elasticsearch(    
-        hosts=[{
-            'host': host,
-            'port': port, 
-            'scheme': 'https',
-        }],
-        http_auth=(username, password), 
-        timeout=120
-    )
-    print("Connected to ES instance")
-    return es
+    try:
+        es = Elasticsearch(    
+            hosts=[{
+                'host': host,
+                'port': port, 
+                'scheme': 'https',
+            }],
+            http_auth=(username, password), 
+            timeout=timeout
+        )
+        print("Connected to ES instance")
+        return es
+    except ConnectionError as e:
+        print(f"Failed to connect to ES instance: {str(e)}")
+        return None
 
 
 def create_index(es_instance, index_name="passage_metadata_emb"):
