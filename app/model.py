@@ -22,3 +22,5 @@ def generate_embeddings_and_save(csv_input_path, csv_output_path):
                 "Metadata": metadata,
                 "Embedding": embedding
             })
+        print(f"Successfully generated {csv_output_path}")
+    return model

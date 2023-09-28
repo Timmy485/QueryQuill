@@ -2,7 +2,7 @@ import os
 import csv
 import json
 
-def process_folder(folder_path):
+def process_folder(folder_path, out_folder):
     """
     Process a folder containing pairs of .txt and .json files. Extract passages from the .txt files, 
     metadata from the .json files, and write pairings to a CSV file.
@@ -54,12 +54,13 @@ def process_folder(folder_path):
             all_pairings.append({"Passage": passage, "Metadata": json.dumps(metadata)})
     
     # Write all_pairings to a CSV file
-    csv_filename = os.path.join(folder_path, "passage_metadata.csv")
+    # csv_filename = os.path.join(folder_path, "passage_metadata.csv")
+    csv_filename = os.path.join(out_folder, "passage_metadata.csv")
     with open(csv_filename, "w", newline='', encoding="utf-8") as csvfile:
         fieldnames = ["Passage", "Metadata"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for pairing in all_pairings:
             writer.writerow(pairing)
-    
-    return csv_filename
+
+    print(f"Successfully generated {csv_filename}")
