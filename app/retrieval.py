@@ -1,6 +1,6 @@
 import csv
 
-def search_similar_passages(es_instance, index_name, query_embedding, top_n=3):
+def search_similar_passages(es_instance, index_name, query_embedding, top_n=5):
     """
     Search for passages in the Elasticsearch index that are similar to the provided query embedding.
     

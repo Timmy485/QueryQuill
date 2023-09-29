@@ -53,11 +53,12 @@ def ask():
     # Extract the top passages and their metadata from the search results
     passages = [hit["_source"]["Passage"] for hit in search_results]
     metadata = [hit["_source"]["Metadata"] for hit in search_results]
+    scores = [hit["_score"] for hit in search_results]
     
     # Generate AI-enhanced answer
     gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
 
-    return jsonify({'answer': passages, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    return jsonify({'answer': passages, 'relevance socres': scores,'metadata': metadata, 'gen_ai_output': gen_ai_output})
 
 
 def save_file(file, extension):
@@ -117,12 +118,13 @@ def upload_and_query():
 
     # Extract the top passages and their metadata from the search results
     passages = [hit["_source"]["Passage"] for hit in search_results]
+    scores = [hit["_score"] for hit in search_results]
     metadata = [hit["_source"]["Metadata"] for hit in search_results]
 
     # Generate AI-enhanced answer
     gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
 
-    return jsonify({'answer': passages, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    return jsonify({'answer': passages, 'relevance socres': scores, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
 
 
 @app.route('/reset_index', methods=['POST'])
