@@ -1,4 +1,4 @@
-# # QueryQuill
+# QueryQuill
 
 This repository contains a Flask API that allows for passage retrieval based on user questions. It uses SentenceTransformers to encode questions and passages into embeddings, and Elasticsearch to efficiently search and retrieve relevant passages.
 
@@ -27,34 +27,7 @@ Docker provides a consistent and reproducible environment, making it easy to sha
     docker run -p 5000:5000 --env-file ./.env queryquill
     ```
 
-After executing the above command, the Flask API should be running on `http://0.0.0.0:5000/`.
-
-## Folder Structure
-.
-│
-├── app/ 
-│ ├── app.py                     # Flask API implementation
-│ ├── retrieval.py               # Passage retrieval logic
-│ ├── model.py                   # SentenceTransformers utilities
-│ ├── parsing.py                 # Document parsing logic
-│ ├── indexing.py                # ElasticSearch indexing logic
-│ ├── gui.py                     # GUI interface implementation 
-│ └── gen_ai.py                  # Generative AI utilities 
-│
-├── docker/
-│ ├── Dockerfile                 # Docker configuration
-│ └── docker-compose.yml         # Docker Compose configuration (if used)
-│
-├── docs/
-│ ├── passage_metadata.csv       # Passages and metadata
-│ ├── passage_metadata_emb.csv   # Passages, metadata, and embeddings
-│ ├── question_answers.csv       # Questions and answers
-│ ├── questions_answers_gen.csv  # Questions, answers, generative AI answer
-│ ├── evaluation.csv             # Evaluation data
-│ ├── performance.csv            # Evaluation results
-│ └── technical.pdf              # Technical documentation
-│
-└── README.md                    # Description of implementation and setup
+After executing the above command, the Flask API should be running on `http://127.0.0.1:5000/`.
 
 
 ## API Endpoints
