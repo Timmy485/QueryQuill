@@ -27,7 +27,7 @@ Docker provides a consistent and reproducible environment, making it easy to sha
     docker run -p 5000:5000 --env-file ./.env queryquill
     ```
 
-After executing the above command, the Flask API should be running on `http://0.0.0.0:5000/`.
+After executing the above command, the Flask API should be running on `http://127.0.0.1:5000/`.
 
 
 ## API Endpoints
