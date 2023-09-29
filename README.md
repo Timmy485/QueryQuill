@@ -1,4 +1,4 @@
-# # QueryQuill
+# QueryQuill
 
 This repository contains a Flask API that allows for passage retrieval based on user questions. It uses SentenceTransformers to encode questions and passages into embeddings, and Elasticsearch to efficiently search and retrieve relevant passages.
 
