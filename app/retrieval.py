@@ -1,7 +1,20 @@
 import csv
 
 def search_similar_passages(es_instance, index_name, query_embedding, top_n=3):
-    # Use the script_score method to compute the cosine similarity
+    """
+    Search for passages in the Elasticsearch index that are similar to the provided query embedding.
+    
+    Args:
+    - es_instance (Elasticsearch): An instance of the Elasticsearch client.
+    - index_name (str): The name of the Elasticsearch index to search in.
+    - query_embedding (list): The embedding vector of the user's query.
+    - top_n (int, optional): The number of top results to retrieve. Defaults to 3.
+    
+    Returns:
+    - list: List of top search results.
+    """
+    
+    # Construct the Elasticsearch query to compute cosine similarity
     query_body = {
         "size": top_n,
         "query": {
@@ -24,24 +37,45 @@ def search_similar_passages(es_instance, index_name, query_embedding, top_n=3):
 
 
 def search_relevant_passages(es, index_name, query_embedding):
-    search_results = search_similar_passages(es, index_name, query_embedding)
-    return search_results
+    """
+    Wrapper function to search for relevant passages.
+    
+    Args:
+    - es (Elasticsearch): An instance of the Elasticsearch client.
+    - index_name (str): The name of the Elasticsearch index to search in.
+    - query_embedding (list): The embedding vector of the user's query.
+    
+    Returns:
+    - list: List of search results.
+    """
+    
+    return search_similar_passages(es, index_name, query_embedding)
 
 
-# Function to save results to CSV
 def save_results_to_csv(query, search_results, csv_file_path="questions_answers.csv"):
+    """
+    Save the search results to a CSV file.
+    
+    Args:
+    - query (str): The user's query.
+    - search_results (list): List of search results.
+    - csv_file_path (str, optional): Path to the CSV file where the results will be saved. Defaults to "questions_answers.csv".
+    
+    Returns:
+    - None
+    """
+    
     with open(csv_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
+        
+        # Write headers to the CSV
         writer.writerow(["Question", 
                          "Passage 1", "Relevance Score 1", "Passage 1 Metadata", 
                          "Passage 2", "Relevance Score 2", "Passage 2 Metadata", 
                          "Passage 3", "Relevance Score 3", "Passage 3 Metadata"])
         
+        # Extract and write the search results to the CSV
         row = [query]
         for hit in search_results:
             row.extend([hit["_source"]["Passage"], hit["_score"], hit["_source"]["Metadata"]])
         writer.writerow(row)
-
-
-
-

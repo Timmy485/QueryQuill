@@ -27,7 +27,7 @@ EXPOSE 5000
 # Set the command to run your application using CMD
 CMD ["python", "app/app.py"]
 
-
+ENV es_host "passage-metadata-emb.es.us-central1.gcp.cloud.es.io"
 
 # run docker build -t my_app -f docker/Dockerfile .               #from root
 #docker run -p 5000:5000 --env-file ./.env my_app
