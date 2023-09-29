@@ -1,11 +1,11 @@
 import os
 from elasticsearch import Elasticsearch
 from sentence_transformers import SentenceTransformer
-from app.indexing import connect_instance, create_index, index_data_to_elasticsearch
-from app.gen_ai import generate_direct_answer_with_llama
-from app.model import generate_embeddings_and_save
-from app.parsing import process_folder
-from app.retrieval import search_relevant_passages, search_similar_passages, save_results_to_csv
+from indexing import connect_instance, create_index, index_data_to_elasticsearch
+from gen_ai import generate_direct_answer_with_llama
+from model import generate_embeddings_and_save
+from parsing import process_folder
+from retrieval import search_relevant_passages, search_similar_passages, save_results_to_csv
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 
@@ -32,23 +32,24 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    # Extract the user question from the request
-    question = request.json.get('question', '')
+    # # Extract the user question from the request
+    # question = request.json.get('question', '')
 
-    # Convert the question into an embedding
-    question_embedding = model.encode(question)
+    # # Convert the question into an embedding
+    # question_embedding = model.encode(question)
 
-    # Search for relevant passages using the provided functions
-    search_results = search_relevant_passages(es, "passage_metadata_emb", question_embedding)
+    # # Search for relevant passages using the provided functions
+    # search_results = search_relevant_passages(es, "passage_metadata_emb", question_embedding)
 
-    # Extract the top passages and their metadata from the search results
-    passages = [hit["_source"]["Passage"] for hit in search_results]
-    metadata = [hit["_source"]["Metadata"] for hit in search_results]
+    # # Extract the top passages and their metadata from the search results
+    # passages = [hit["_source"]["Passage"] for hit in search_results]
+    # metadata = [hit["_source"]["Metadata"] for hit in search_results]
     
-    #produce gen_ai result
-    gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
+    # #produce gen_ai result
+    # gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
 
-    return jsonify({'answer': passages, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    # return jsonify({'answer': passages, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    return jsonify({'status': 'success'}), 200
 
 
 

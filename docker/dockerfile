@@ -21,6 +21,9 @@ COPY app/ /usr/src/app/app
 # Copy the docs directory into the container
 COPY docs/ /usr/src/app/docs
 
+# Expose the port that the application listens on.
+EXPOSE 5000
+
 # Set the command to run your application using CMD
 CMD ["python", "app/app.py"]
 
