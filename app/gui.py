@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer
 import pandas as pd
 
 
+
 st. set_page_config(page_title="Query Quill", )
 st.markdown(
     """

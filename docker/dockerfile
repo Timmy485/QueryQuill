@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the app directory into the container
 COPY app/ /usr/src/app/app
 
-# Copy the docs directory into the container (if needed)
+# Copy the docs directory into the container
 COPY docs/ /usr/src/app/docs
 
 # Set the command to run your application using CMD

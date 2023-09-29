@@ -54,7 +54,6 @@ def process_folder(folder_path, out_folder):
             all_pairings.append({"Passage": passage, "Metadata": json.dumps(metadata)})
     
     # Write all_pairings to a CSV file
-    # csv_filename = os.path.join(folder_path, "passage_metadata.csv")
     csv_filename = os.path.join(out_folder, "passage_metadata.csv")
     with open(csv_filename, "w", newline='', encoding="utf-8") as csvfile:
         fieldnames = ["Passage", "Metadata"]
