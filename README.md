@@ -79,5 +79,6 @@ Once the app starts, it will provide a URL (usually `http://localhost:8501/`) in
 If you encounter any issues while setting up or running the application, please check the following:
 
 - Ensure that the environment variables are set correctly in the `.env` file.
+- Contact developer for `.env` file configuration.
 - Check if the Elasticsearch instance is running and accessible.
 - Ensure you have the necessary permissions to read and write to directories.

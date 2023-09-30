@@ -36,22 +36,6 @@ def search_similar_passages(es_instance, index_name, query_embedding, top_n=5):
     return response['hits']['hits']
 
 
-def search_relevant_passages(es, index_name, query_embedding):
-    """
-    Wrapper function to search for relevant passages.
-    
-    Args:
-    - es (Elasticsearch): An instance of the Elasticsearch client.
-    - index_name (str): The name of the Elasticsearch index to search in.
-    - query_embedding (list): The embedding vector of the user's query.
-    
-    Returns:
-    - list: List of search results.
-    """
-    
-    return search_similar_passages(es, index_name, query_embedding)
-
-
 def save_results_to_csv(query, search_results, csv_file_path="questions_answers.csv"):
     """
     Save the search results to a CSV file.

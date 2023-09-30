@@ -2,10 +2,10 @@ import os
 from elasticsearch import Elasticsearch
 from sentence_transformers import SentenceTransformer
 from indexing import connect_instance, create_index, index_data_to_elasticsearch
-from gen_ai import generate_direct_answer_with_llama
+from gen_ai import generate_direct_answer_with_palm
 from model import generate_embeddings_and_save
 from parsing import process_folder
-from retrieval import search_relevant_passages, search_similar_passages, save_results_to_csv
+from retrieval import search_similar_passages, save_results_to_csv
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 
@@ -48,7 +48,7 @@ def ask():
     question_embedding = model.encode(question)
 
     # Search for relevant passages using the provided functions
-    search_results = search_relevant_passages(es, "passage_metadata_emb", question_embedding)
+    search_results = search_similar_passages(es, "passage_metadata_emb", question_embedding)
 
     # Extract the top passages and their metadata from the search results
     passages = [hit["_source"]["Passage"] for hit in search_results]
@@ -56,9 +56,9 @@ def ask():
     scores = [hit["_score"] for hit in search_results]
     
     # Generate AI-enhanced answer
-    gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
+    gen_ai_output = generate_direct_answer_with_palm(search_results, question, save_csv=False)
 
-    return jsonify({'answer': passages, 'relevance socres': scores,'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    return jsonify({'answer': passages, 'relevance_socres': scores,'metadata': metadata, 'gen_ai_output': gen_ai_output})
 
 
 def save_file(file, extension):
@@ -114,7 +114,7 @@ def upload_and_query():
     question_embedding = model.encode(question)  
 
     # Search for relevant passages using the provided functions
-    search_results = search_relevant_passages(es, "temp", question_embedding)
+    search_results = search_similar_passages(es, "temp", question_embedding)
 
     # Extract the top passages and their metadata from the search results
     passages = [hit["_source"]["Passage"] for hit in search_results]
@@ -122,9 +122,9 @@ def upload_and_query():
     metadata = [hit["_source"]["Metadata"] for hit in search_results]
 
     # Generate AI-enhanced answer
-    gen_ai_output = generate_direct_answer_with_llama(search_results, question, save_csv=False)
+    gen_ai_output = generate_direct_answer_with_palm(search_results, question, save_csv=False)
 
-    return jsonify({'answer': passages, 'relevance socres': scores, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
+    return jsonify({'answer': passages, 'relevance_socres': scores, 'metadata': metadata, 'gen_ai_output': gen_ai_output})
 
 
 @app.route('/reset_index', methods=['POST'])

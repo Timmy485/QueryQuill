@@ -1,5 +1,5 @@
 elasticsearch
 pandas
-replicate
 sentence-transformers
 flask
+google-generativeai
