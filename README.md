@@ -13,7 +13,7 @@ Docker provides a consistent and reproducible environment, making it easy to sha
 
 2. **Clone the Repository**:
     ```
-    git clone [https://github.com/Timmy485/QueryQuill.git]
+    git clone https://github.com/Timmy485/QueryQuill.git
     cd [repository-folder]
     ```
 
