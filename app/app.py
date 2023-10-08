@@ -9,16 +9,19 @@ from retrieval import search_similar_passages, save_results_to_csv
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
 
 # Initialize the SentenceTransformer model for embeddings
 model = SentenceTransformer('paraphrase-distilroberta-base-v1')
 
 # Retrieve environment variables for connecting to Elasticsearch
-es_host = os.environ.get("ES_HOST")
-es_port = int(os.environ.get("ES_PORT"))
-es_username = os.environ.get("ES_USERNAME")
-es_password = os.environ.get("ES_PASSWORD")
+es_host = os.getenv("ES_HOST")
+es_port = int(os.getenv("ES_PORT"))
+es_username = os.getenv("ES_USERNAME")
+es_password = os.getenv("ES_PASSWORD")
 
 # Connect to the remote Elasticsearch instance
 es = connect_instance(es_host, es_port, es_username, es_password)

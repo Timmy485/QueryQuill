@@ -3,3 +3,4 @@ pandas
 sentence-transformers
 flask
 google-generativeai
+python-dotenv

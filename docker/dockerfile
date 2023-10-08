@@ -21,6 +21,9 @@ COPY app/ /usr/src/app/app
 # Copy the docs directory into the container
 COPY docs/ /usr/src/app/docs
 
+# Copy dotenv file to the working directory
+COPY ./.env /usr/src/app/.env
+
 # Expose the port that the application listens on.
 EXPOSE 5000
 
@@ -29,5 +32,5 @@ CMD ["python", "app/app.py"]
 
 ENV es_host "passage-metadata-emb.es.us-central1.gcp.cloud.es.io"
 
-# run docker build -t my_app -f docker/Dockerfile .               #from root
-#docker run -p 5000:5000 --env-file ./.env my_app
+# run docker build -t question_answering -f docker/Dockerfile .               #from root
+#docker run -p 5000:5000 --env-file ./.env question_answering

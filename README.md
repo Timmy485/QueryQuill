@@ -4,7 +4,7 @@ This repository contains a Flask API that allows for passage retrieval based on 
 
 ## Installation
 
-### Using Docker
+### Using Docker (Building Image)
 
 Docker provides a consistent and reproducible environment, making it easy to share and set up the application on any machine.
 
@@ -28,6 +28,30 @@ Docker provides a consistent and reproducible environment, making it easy to sha
     ```
 
 After executing the above command, the Flask API should be running on `http://127.0.0.1:5000/`.
+
+
+### Using Docker (Pulling Image from Docker Hub)
+
+If you don't want to build the Docker image locally, you can simply pull the pre-built image from Docker Hub and run it. This method is faster and doesn't require building the image from the source code.
+
+1. **Prerequisites**:
+    - Ensure you have Docker installed on your system. If not, download and install from [here](https://www.docker.com/get-started).
+
+2. **Pull the Docker Image**:
+    ```bash
+    docker pull timmy485/question_answering:latest
+    ```
+
+3. **Run the Docker Container**:
+    ```bash
+    docker run -p 5000:5000 timmy485/question_answering:latest
+    ```
+
+4. **Access the API**:
+    Once the container is running, you should be able to access the Flask API at `http://127.0.0.1:5000/`.
+
+> **Note**: If the Docker image on Docker Hub has a different tag or there are multiple versions, ensure you pull the correct tag/version by replacing `latest` with the desired tag name.
+
 
 ## Running the Streamlit App
 

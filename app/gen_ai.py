@@ -1,9 +1,10 @@
 import pandas as pd
 import google.generativeai as palm
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Extract the API token from the configuration data
-api_key = os.environ.get('PALM_API_KEY')
+api_key = os.getenv('PALM_API_KEY')
 
 def generate_direct_answer_with_palm(search_results, user_query, save_csv=True):
     """
